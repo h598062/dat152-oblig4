@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>         
+   <!-- <Resource 
+  		name="jdbc/DAT152" auth="Container" type="javax.sql.DataSource"
+        maxActive="100" maxIdle="30" maxWait="10000"
+        url="jdbc:mysql://localhost:3306/SecOblig?serverTimezone=UTC"
+        driverClassName="com.mysql.cj.jdbc.Driver"
+        username="dat152" password="jGt3eRf"
+        https://stackoverflow.com/questions/22518748/classnotfoundexception-when-upgraded-to-tomcat-8
+   /> -->
+   <Resource name="jdbc/DAT152" auth="Container"
+       type="javax.sql.DataSource" 
+       username="dat152" password="jGt3eRf"
+       driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
+       factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+       url="jdbc:derby:memory:DAT152;create=true"
+       />
+</Context>
