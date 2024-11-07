@@ -10,7 +10,7 @@
       </artifact>
       <artifact name="DAT152WebSearchOblig4:war">
         <settings>
-          <option name="CONTEXT_PATH" value="/DAT152WebSearchOblig4" />
+          <option name="CONTEXT_PATH" value="/DAT152WebSearch" />
         </settings>
       </artifact>
     </deployment>
