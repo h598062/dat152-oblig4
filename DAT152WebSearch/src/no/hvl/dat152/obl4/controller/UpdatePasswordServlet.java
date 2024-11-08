@@ -46,7 +46,7 @@ public class UpdatePasswordServlet extends HttpServlet {
 			AppUserDAO userDAO = new AppUserDAO();
 			
 			if (passwordnew.equals(confirmedPasswordnew)){
-				String passwordValidationMessage = getPasswordValidationMessage(passwordnew, user.getUsername());
+				String passwordValidationMessage = Validator.getPasswordValidationMessage(passwordnew, user.getUsername());
 				if(passwordValidationMessage == null){
 				successfulPasswordUpdate = userDAO.updateUserPassword(user.getUsername(), passwordnew);
 				}
@@ -72,35 +72,6 @@ public class UpdatePasswordServlet extends HttpServlet {
 					response);
 		}
 
-	}
-
-	private String getPasswordValidationMessage(String password, String username) {
-		String[] weakPasswords = {"password", "123456", "123456789", "12345678", "12345", "1234567", "qwerty", "abc123", "password1"};
-
-		for (String weakPassword : weakPasswords) {
-			if (password.equalsIgnoreCase(weakPassword)) {
-				return "Password is too weak!";
-			}
-		}
-		if (password.toLowerCase().contains(username.toLowerCase())) {
-			return "Password should not contain the username!";
-		}
-		if (!password.matches(".*[a-z].*")) {
-			return "Password must contain at least one lowercase letter!";
-		}
-		if (!password.matches(".*[A-Z].*")) {
-			return "Password must contain at least one uppercase letter!";
-		}
-		if (!password.matches(".*\\d.*")) {
-			return "Password must contain at least one digit!";
-		}
-		if (!password.matches(".*[@#$%^&+=].*")) {
-			return "Password must contain at least one special character!";
-		}
-		if (password.length() < 8 || password.length() > 20) {
-			return "Password must be between 8 and 20 characters long!";
-		}
-		return null;
 	}
 
 }
