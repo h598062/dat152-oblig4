@@ -16,6 +16,7 @@
     </deployment>
     <server-settings>
       <option name="BASE_DIRECTORY_NAME" value="acd348db-1ff3-465b-88db-c270ef46612e" />
+      <option name="HTTP_PORT" value="9091" />
     </server-settings>
     <log_file alias="Tomcat Manager Log" path="%IDEA_RUN:CATALINA_BASE%/logs/manager.*" />
     <log_file alias="Tomcat Host Manager Log" path="%IDEA_RUN:CATALINA_BASE%/logs/host-manager.*" />

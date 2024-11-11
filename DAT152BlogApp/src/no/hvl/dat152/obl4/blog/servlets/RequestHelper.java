@@ -50,7 +50,7 @@ public class RequestHelper {
 		String id_token = RequestHelper.getCookieValue(request, "id_token");
 		doJWT(request, id_token, keypath);
 		
-		return JWTHandler.verifyJWT(id_token, keypath);
+		return JWTHandler.verifyJWS(id_token, keypath);
 		
 	}
 	

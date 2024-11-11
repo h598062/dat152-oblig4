@@ -44,7 +44,7 @@ public class BlogServlet extends HttpServlet {
 				
 				String pubkeypath = getServletContext().getRealPath("/WEB-INF/");
 				// validate token before granting access
-				if(JWTHandler.verifyJWT(id_token, pubkeypath)) {
+				if(JWTHandler.verifyJWS(id_token, pubkeypath)) {
 					RequestHelper.doJWT(request, id_token, pubkeypath);
 					// load previous comments
 					doComments(request, fpath);

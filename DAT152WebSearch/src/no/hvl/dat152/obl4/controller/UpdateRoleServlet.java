@@ -45,7 +45,15 @@ public class UpdateRoleServlet extends HttpServlet {
 		if(username != null) {
 			
 			if (RequestHelper.isLoggedIn(request) && user.getRole().equals(Role.ADMIN.toString())) {
-				
+
+				String sessionToken = (String) request.getSession().getAttribute("csrfToken");
+				String requestToken = request.getParameter("csrfToken");
+
+				if (sessionToken == null || !sessionToken.equals(requestToken)) {
+					response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid CSRF token");
+					return;
+				}
+
 				AppUserDAO userDAO = new AppUserDAO();
 				
 				successfulRoleUpdate = userDAO.updateUserRole(username, newrole);

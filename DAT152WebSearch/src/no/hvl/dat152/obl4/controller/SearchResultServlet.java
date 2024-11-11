@@ -15,6 +15,7 @@ import no.hvl.dat152.obl4.database.SearchItem;
 import no.hvl.dat152.obl4.database.SearchItemDAO;
 import no.hvl.dat152.obl4.dictionary.DictionaryDAO;
 import no.hvl.dat152.obl4.util.Validator;
+import org.owasp.encoder.Encode;
 
 @WebServlet("/dosearch")
 public class SearchResultServlet extends HttpServlet {
@@ -28,8 +29,8 @@ public class SearchResultServlet extends HttpServlet {
 			String dicturl = RequestHelper.getCookieValue(request, "dicturl");
 
 			String user = Validator.validString(request.getParameter("user"));
-			String searchkey = Validator.validString(request
-					.getParameter("searchkey"));
+			String searchkey = Encode.forHtml(Validator.validString(request
+					.getParameter("searchkey")));
 
 			Timestamp datetime = new Timestamp(new Date().getTime());
 			SearchItem search = new SearchItem(datetime, user, searchkey);
@@ -38,7 +39,7 @@ public class SearchResultServlet extends HttpServlet {
 			searchItemDAO.saveSearch(search);
 			DictionaryDAO dict = new DictionaryDAO(dicturl);
 
-			List<String> foundEntries = new ArrayList<String>();
+			List<String> foundEntries = new ArrayList<>();
 			try {
 				foundEntries = dict.findEntries(searchkey);
 			} catch (Exception e) {

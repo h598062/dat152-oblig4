@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="e" uri="owasp.encoder.jakarta" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,16 +12,16 @@
 <body>
 	<h3>My details</h3>
 	<p><font color="red">${message}</font></p>
-	<p>First name: ${user.firstname}<br>
-	   Last name: ${user.lastname}<br>
-	   Mobile phone: ${user.mobilephone}</p>
+	<p>First name: ${e:forHtml(user.firstname)}<br>
+	   Last name: ${e:forHtml(user.lastname)}<br>
+	   Mobile phone: ${e:forHtml(user.mobilephone)}</p>
 	<br>
 	<p><b>My personal search history</b></p>
 	<p>
 	<c:forEach var="searchItem" items="${myhistory}">
 		${searchItem.datetime} 
-		<a href="dosearch?user=${user.username}&searchkey=${searchItem.searchkey}">
-		${searchItem.searchkey}</a><br>
+		<a href="dosearch?user=${e:forUriComponent(user.username)}&searchkey=${e:forUriComponent(searchItem.searchkey)}">
+		${e:forHtml(searchItem.searchkey)}</a><br>
 	</c:forEach><br>
 	<form action="mydetails" method="post">
 	<table>
@@ -35,6 +36,6 @@
 	<p><a href="searchpage">Back to Main search page</a></p>
 	<p><a href="updatepassword">Update Password</a></p>
 	<p>${updaterole}</p>
-	<p><b>You are logged in as ${user.username}. <a href="logout">Log out</a></b></p>
+	<p><b>You are logged in as ${e:forHtml(user.username)}. <a href="logout">Log out</a></b></p>
 </body>
 </html>

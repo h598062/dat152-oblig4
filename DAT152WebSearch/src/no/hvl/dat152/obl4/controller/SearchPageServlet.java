@@ -25,7 +25,7 @@ public class SearchPageServlet extends HttpServlet {
 			
 			AppUser authUser = (AppUser) request.getSession().getAttribute("user");
 			
-			List<SearchItem> top5history = new ArrayList<SearchItem>();
+			List<SearchItem> top5history = new ArrayList<>();
 			
 			if(authUser.getRole().equals(Role.ADMIN.toString())) {
 				

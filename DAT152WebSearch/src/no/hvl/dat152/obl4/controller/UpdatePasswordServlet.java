@@ -40,7 +40,14 @@ public class UpdatePasswordServlet extends HttpServlet {
 		
 		
 		if (RequestHelper.isLoggedIn(request)) {
-			
+			String sessionToken = (String) request.getSession().getAttribute("csrfToken");
+			String requestToken = request.getParameter("csrfToken");
+
+			if (sessionToken ==  null || !sessionToken.equals(requestToken)) {
+				response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid CSRF token");
+				return;
+			}
+
 			AppUser user = (AppUser) request.getSession().getAttribute("user");
 			
 			AppUserDAO userDAO = new AppUserDAO();

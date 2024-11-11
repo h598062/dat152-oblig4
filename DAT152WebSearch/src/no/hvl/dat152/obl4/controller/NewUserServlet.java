@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import no.hvl.dat152.obl4.database.AppUser;
 import no.hvl.dat152.obl4.database.AppUserDAO;
+import no.hvl.dat152.obl4.util.CSRFTokenUtil;
 import no.hvl.dat152.obl4.util.Crypto;
 import no.hvl.dat152.obl4.util.Role;
 import no.hvl.dat152.obl4.util.Validator;
@@ -57,6 +58,8 @@ public class NewUserServlet extends HttpServlet {
 
 		if (successfulRegistration) {
 			request.getSession().setAttribute("user", user);
+			String csrfToken = CSRFTokenUtil.generateToken();
+			request.getSession().setAttribute("csrfToken", csrfToken);
 			Cookie dicturlCookie = new Cookie("dicturl", preferredDict);
 			dicturlCookie.setMaxAge(60 * 10);
 			response.addCookie(dicturlCookie);

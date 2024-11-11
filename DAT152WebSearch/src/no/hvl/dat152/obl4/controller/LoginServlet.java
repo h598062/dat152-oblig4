@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import no.hvl.dat152.obl4.database.AppUser;
 import no.hvl.dat152.obl4.database.AppUserDAO;
+import no.hvl.dat152.obl4.util.CSRFTokenUtil;
 import no.hvl.dat152.obl4.util.Role;
 
 @WebServlet("/login")
@@ -42,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 	
 	private boolean login(HttpServletRequest request,
 			HttpServletResponse response) {
-		
+
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
@@ -57,7 +58,9 @@ public class LoginServlet extends HttpServlet {
 				successfulLogin = true;
 				request.getSession().setAttribute("user", authUser);
 				request.getSession().setAttribute("updaterole", "");
-				
+				String csrfToken = CSRFTokenUtil.generateToken();
+				request.getSession().setAttribute("csrfToken", csrfToken);
+
 				// admin issues
 				if(authUser.getRole().equals(Role.ADMIN.name())) {
 					// set dictionary url in a cookie

